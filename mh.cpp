@@ -16,7 +16,7 @@ float float_uniform_pdf(float d)
 float float_normal_pdf(float d)
 {
 	normal dnormal(5,1);
-	return pdf(dnormal, d);  
+	return 30*pdf(dnormal, d);  
 }
 
 class metropolis_hastings
