@@ -54,7 +54,14 @@ float int_uniform_pdf(int d)
 		return 0.5;
 }
 
-int main(int argc, char* argv[])
+
+
+void test_float_normal_pdf()
+{
+	
+	
+}
+void test_int_mh()
 {
 	int count = 0;
 	double sum = 0;
@@ -71,4 +78,29 @@ int main(int argc, char* argv[])
 			count++;
 	}
 	cout << count << "\t" << (sum/n_samples) << endl;
+}
+
+void test_vector_mh()
+{
+	vector<int> vec;
+	vec.push_back(1);
+	vec.push_back(5);
+	vec.push_back(99);
+	vec.push_back(101);
+	vec.push_back(101);
+	
+	metropolis_hastings<int> mh;
+	int n_samples = 10000;
+	
+	for (int x=0; x < n_samples; x++)
+	{
+		int sample = mh.getsample(&int_uniform_pdf, &vec);
+		cout << sample << endl;
+	}
+	
+}
+
+int main(int argc, char* argv[])
+{
+	test_vector_mh();
 }

@@ -45,7 +45,7 @@ class metropolis_hastings
 			do
 			{
 				pr = x + static_cast<SampleType>((*q)());
-			} while (pr < 0 || pr > v->size());
+			} while (pr < 0 || pr > v->size() -1);
 			
 			return pr;		
 		}
@@ -65,17 +65,22 @@ class metropolis_hastings
 			*x = 0;
 		}
 		
-		SampleType getsample (float (*P) (SampleType))
-		{
-			return getsample(P, 500);
-		}
-		
 		float chance()
 		{
 			//return (*r)();
 			return (float)rand()/RAND_MAX;
 		}
-
+		
+		SampleType getsample (float (*P) (SampleType))
+		{
+			return getsample(P, 500);
+		}
+		
+		SampleType getsample (float (*P) (SampleType), vector<SampleType> *v)
+		{
+			return getsample(P, 500, v);
+		}
+		
 		SampleType getsample (float (*P) (SampleType), int burnin, vector<SampleType> *v)
 		{
 				//init
@@ -99,7 +104,8 @@ class metropolis_hastings
 					/*else
 						cout << "Rejected!" << endl; */
 				}
-				return x;
+				//cout << "index:" << x;
+				return (*v)[x];
 		}
 			
 		SampleType getsample (float (*P) (SampleType), int burnin)
