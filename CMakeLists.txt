@@ -1,12 +1,14 @@
 cmake_minimum_required (VERSION 2.6 FATAL_ERROR)
 project (mh)
 
-# search for Boost version 1.34
+# search for Boost
 find_package(Boost)
-
 link_directories ( ${Boost_LIBRARY_DIRS} )
 include_directories ( ${Boost_INCLUDE_DIRS} )
 
+#profiling
+SET(CMAKE_CXX_FLAGS_PROFILE "-pg -O0")
 
-add_executable(mh mh.cpp)
+#source
+add_executable(mh mh.cpp mh_tests.cpp)
 
